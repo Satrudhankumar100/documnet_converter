@@ -26,13 +26,14 @@ public class ImageToPdfController {
 	 * 
 	 * @param files
 	 * @return OK.200
+	 * 
 	 */
 	@PostMapping("/generatepdf")
 	public ResponseEntity<String> generatePdf(@RequestParam MultipartFile imagesFile) {
 		pdfService.createPdf(imagesFile);
 		return new ResponseEntity<String>("PDF generated successfully!", HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/check")
 	public String checkMethod() {
 		return "hello";
