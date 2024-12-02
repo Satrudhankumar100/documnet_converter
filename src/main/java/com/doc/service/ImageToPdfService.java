@@ -9,7 +9,14 @@ public interface ImageToPdfService {
 	 * pdf Generate
 	 * @param imageFile
 	 */
-	public void createPdf(MultipartFile[] imageFile);
+	public String createPdf(MultipartFile[] imageFile);
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
