@@ -3,7 +3,6 @@ package com.doc.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -30,11 +29,9 @@ public class ImageToPdfController {
 	private ImageToPdfService pdfService;
 
 	/**
-	 * this method is used to save and return pdf using /generatepdf url
-	 * 
+	 * this method is used to save and return pdf using /generate-pdf url
 	 * @param files
 	 * @return OK.200
-	 * 
 	 */
 	@PostMapping("/generatepdf")
 	public ResponseEntity<InputStreamResource> generatePdf(@RequestParam MultipartFile[] imagesFile) {
@@ -42,13 +39,13 @@ public class ImageToPdfController {
 		try {
 			String pdfFilePath = pdfService.createPdf(imagesFile);
 
-			
-			
 			File pdfFile = new File(pdfFilePath);
 			InputStreamResource resource = new InputStreamResource(new FileInputStream(pdfFile));
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Content-Disposition", "attachment; filename=image.pdf");
+
+			
 
 			return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
 					.contentLength(pdfFile.length()).body(resource);
@@ -57,6 +54,11 @@ public class ImageToPdfController {
 			return ResponseEntity.status(500).body(null);
 		}
 	}
+
+	/**
+	 * This method is used only testing purp
+	 * @return
+	 */
 
 	@GetMapping("/check")
 	public ResponseEntity<InputStreamResource> checkMethod() {
@@ -84,4 +86,5 @@ public class ImageToPdfController {
 			return ResponseEntity.status(500).body(null);
 		}
 	}
+
 }
