@@ -19,7 +19,7 @@ public class PdfSchedular {
 	@Value("${pdf-file-location}")
 	String outputDir;
 
-	@Scheduled(fixedDelay = 1000*60)
+	@Scheduled(fixedDelay = 50000)
 	public void deletePdf() {
 		
 		File path=new File(outputDir);
