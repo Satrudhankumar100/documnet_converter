@@ -19,6 +19,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfDocument;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,7 @@ public class ImageToPdfServiceImpl implements ImageToPdfService {
 	String outputDir;
 
 	/**
-	 * This method to create a PDF from image files and optinally add page numbers
+	 * This method to create a PDF from image files and optionally add page numbers
 	 */
 	public String createPdf(MultipartFile[] imageFiles, int startPageNumber, PageNumberLocation location) {
 
@@ -68,13 +69,8 @@ public class ImageToPdfServiceImpl implements ImageToPdfService {
 
 					// Scale and position the image to fit A4
 					image.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight());
-					image.setAbsolutePosition(0, PageSize.A4.getHeight() - image.getScaledHeight());
+					image.setAbsolutePosition(0, PageSize.A4.getHeight() - image.getScaledHeight() - 50);
 					doc.add(image);
-
-					
-					
-
-					
 					// Add page number
 					addPageNumberGenerator.addPageNumber(writer, pageNumber + i, location);
 					// start a new page if not the lats image
@@ -102,6 +98,38 @@ public class ImageToPdfServiceImpl implements ImageToPdfService {
 			throw new RuntimeException("Failed to create PDF", e);
 		}
 
+	}
+
+	/**
+	 * This method to merge a PDF
+	 */
+	public String mergePdf(MultipartFile[] imageFile) {
+
+		// store pdfFiflePath location
+		String pdfFilePath = null;
+
+		try {
+
+			// generati file name
+			UUID uuid = UUID.randomUUID();
+			LocalDateTime time = LocalDateTime.now();
+			pdfFilePath = outputDir + "\\" + uuid.toString() + "@" + TimeUtility.setTime() + ".pdf";
+
+			try (FileOutputStream out = new FileOutputStream(pdfFilePath)) {
+					Document doc = new Document();
+					
+					
+					
+					
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return null;
 	}
 
 }

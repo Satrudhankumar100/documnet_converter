@@ -13,6 +13,8 @@ public interface ImageToPdfService {
 	 */
 	public String createPdf(MultipartFile[] imageFile,int startPageNumebr,PageNumberLocation location);
 	
+	public String mergePdf(MultipartFile[] imageFile);
+	
 	
 	
 	

@@ -12,10 +12,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
 public class AddPageNumberGeneratorImpl implements IAddPageNumberGenerator {
-	
-	
-	
-	
 
 	@Override
 	public void addPageNumber(PdfWriter writer, int pageNumber, PageNumberLocation location) {
@@ -25,11 +21,11 @@ public class AddPageNumberGeneratorImpl implements IAddPageNumberGenerator {
 		try {
 			BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.EMBEDDED);
 			cb.setFontAndSize(baseFont, 12);
-			
-			float[] position=setPageNumberLocation(location);
+
+			float[] position = setPageNumberLocation(location);
 
 			// page number adding
-			cb.showTextAligned(Element.ALIGN_CENTER, "Page " + pageNumber, position[0],position[1], 0);
+			cb.showTextAligned(Element.ALIGN_CENTER, "Page " + pageNumber, position[0], position[1], 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -43,32 +39,32 @@ public class AddPageNumberGeneratorImpl implements IAddPageNumberGenerator {
 		float x = 0;
 		float y = 0;
 		switch (location) {
-		case BOTTOM_LEFT_SIDE:
+		case BOTTOM_LEFT:
 			x = 50;
 			y = 30;
 			break;
-		case BOTTOM_CENTER_SIDE:
+		case BOTTOM_CENTER:
 			x = PageSize.A4.getWidth() / 2;
 			y = 30;
 			break;
-		case BOTTOM_RIGHT_SIDE:
+		case BOTTOM_RIGHT:
 			x = PageSize.A4.getWidth() - 50;
 			y = 30;
 			break;
-		case TOP_LEFT_SIDE:
+		case TOP_LEFT:
 			x = 50;
 			y = PageSize.A4.getHeight() - 30;
 			break;
-		case TOP_CENTER_SIDE:
+		case TOP_CENTER:
 			x = PageSize.A4.getWidth() / 2;
 			y = PageSize.A4.getHeight() - 30;
 			break;
-		case TOP_RIGHT_SIDE:
+		case TOP_RIGHT:
 			x = PageSize.A4.getWidth() - 50;
 			y = PageSize.A4.getHeight() - 30;
 			break;
 		}
-		return new float[] {x,y};
+		return new float[] { x, y };
 
 	}
 
